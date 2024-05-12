@@ -27,6 +27,10 @@ function App() {
     ],
   });
 
+  const [columns, setColumns] = useState(
+    Math.ceil(boardConfig.buttons.length / 2)
+  );
+
   useEffect(() => {
     const playNote = (elem) => {
       const classesToToggle = ["bg-red-200", "bg-red-100", "scale-105"];
@@ -49,6 +53,7 @@ function App() {
         playNote(elem);
       }
     };
+    setColumns(Math.ceil(boardConfig.buttons.length / 2));
     window.addEventListener("keypress", keyBindingHandler);
     return () => window.removeEventListener("keypress", keyBindingHandler);
   }, [boardConfig, isInputActive]);
@@ -65,9 +70,7 @@ function App() {
       }}
     >
       <section
-        className={`board gap-2 grid grid-rows-2 grid-cols-${Math.ceil(
-          boardConfig.buttons.length / 2
-        )} bg-white p-2 rounded-lg border border-pink-100`}
+        className={`board gap-2 grid grid-rows-2 grid-cols-${columns} bg-white p-2 rounded-lg border border-pink-100`}
       >
         {boardConfig.buttons.map((button) => (
           <Button
