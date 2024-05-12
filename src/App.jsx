@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import * as Tone from "tone";
 import { Button } from "./Button";
 import { Config } from "./Config";
-import { classnames } from "classnames";
 import "./App.css";
 
 const synth = new Tone.Synth().toDestination();
@@ -71,10 +70,10 @@ function App() {
       }}
     >
       <section
-        className={classnames(
-          "board gap-2 grid grid-rows-2 bg-white p-2 rounded-lg border border-pink-100",
-          `grid-cols-${columns}`
-        )}
+        className={
+          "board gap-2 grid grid-rows-2 bg-white p-2 rounded-lg border border-pink-100"
+        }
+        style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}
       >
         {boardConfig.buttons.map((button) => (
           <Button
