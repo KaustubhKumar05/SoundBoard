@@ -1,18 +1,14 @@
 import { useEffect, useRef } from "react";
+import useBoardStore from "./store";
 
-export const Button = ({
-  note,
-  playNote,
-  keyBinding,
-  id,
-  showNotes,
-  showKeyBindings,
-  setSelectedPad,
-  interval,
-  isInputActive = false,
-}) => {
+export const Button = ({ note, playNote, keyBinding, id, interval }) => {
   const intervalRef = useRef(null);
   const buttonRef = useRef(null);
+  const isInputActive = useBoardStore((state) => state.isInputActive);
+  const showNotes = useBoardStore((state) => state.showNotes);
+  const showKeyBindings = useBoardStore((state) => state.showKeyBindings);
+  const setSelectedPad = useBoardStore((state) => state.setSelectedPad);
+
   useEffect(() => {
     const handleLooping = (e) => {
       if (e.key === keyBinding && interval && !isInputActive) {

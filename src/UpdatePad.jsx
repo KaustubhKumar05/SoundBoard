@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
+import useBoardStore from "./store";
 
-export const UpdatePad = ({
-  selectedPad,
-  setIsInputActive,
-  setSelectedPad,
-  setBoardConfig,
-}) => {
+export const UpdatePad = () => {
+  const selectedPad = useBoardStore((state) => state.selectedPad);
+  const setSelectedPad = useBoardStore((state) => state.setSelectedPad);
+  const setIsInputActive = useBoardStore((state) => state.setIsInputActive);
+  const buttons = useBoardStore((state) => state.buttons);
+  const setButtons = useBoardStore((state) => state.setButtons);
+  const loops = useBoardStore((state) => state.loops);
+  const setLoops = useBoardStore((state) => state.setLoops);
+
   const [updatedNote, setUpdatedNote] = useState("");
   const [updatedKeyBinding, setUpdatedKeyBinding] = useState("");
   const [updatedInterval, setUpdatedInterval] = useState("");
@@ -17,6 +21,14 @@ export const UpdatePad = ({
       setUpdatedInterval(selectedPad.interval || "");
     }
   }, [selectedPad]);
+
+  if (!selectedPad) {
+    return (
+      <h2 className="font-mono text-lg border-t border-pink-200 my-3 py-3 border-dashed">
+        Right click on a button to update
+      </h2>
+    );
+  }
 
   return (
     <form className="flex flex-col gap-3 border-t border-pink-200 my-3 py-3 border-dashed">
@@ -58,25 +70,32 @@ export const UpdatePad = ({
         onClick={(e) => {
           e.preventDefault();
           setSelectedPad(null);
-          setBoardConfig((currentConfig) => {
-            const currentConfigCopy = { ...currentConfig };
-            const updateIndex = currentConfigCopy[
-              updatedInterval ? "loops" : "buttons"
-            ].findIndex((button) => button.id === selectedPad.id);
-            if (updateIndex > -1) {
-              if (updatedInterval) {
-                currentConfigCopy.loops[updateIndex].note = updatedNote;
-                currentConfigCopy.loops[updateIndex].keyBinding =
-                  updatedKeyBinding;
-                currentConfigCopy.loops[updateIndex].interval = updatedInterval;
-              } else {
-                currentConfigCopy.buttons[updateIndex].note = updatedNote;
-                currentConfigCopy.buttons[updateIndex].keyBinding =
-                  updatedKeyBinding;
-              }
-            }
-            return currentConfigCopy;
-          });
+          const updatedPad = {
+            note: updatedNote,
+            keyBinding: updatedKeyBinding,
+            interval: updatedInterval,
+          };
+          if (updatedInterval) {
+            const updateIndex = loops.findIndex(
+              (loop) => loop.id === selectedPad.id
+            );
+            const updatedLoops = [...loops];
+            updatedLoops[updateIndex] = {
+              ...updatedLoops[updateIndex],
+              ...updatedPad,
+            };
+            setLoops(updatedLoops);
+          } else {
+            const updateIndex = buttons.findIndex(
+              (button) => button.id === selectedPad.id
+            );
+            const updatedButtons = [...buttons];
+            updatedButtons[updateIndex] = {
+              ...updatedButtons[updateIndex],
+              ...updatedPad,
+            };
+            setButtons(updatedButtons);
+          }
         }}
         className="block bg-red-200 w-full p-4 font-mono text-lg cursor-pointer hover:bg-red-300 rounded"
       />

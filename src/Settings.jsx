@@ -1,9 +1,11 @@
-export const Settings = ({
-  showNotes,
-  setShowKeyBindings,
-  setShowNotes,
-  showKeyBindings,
-}) => {
+import useBoardStore from "./store";
+
+export const Settings = () => {
+  const showKeyBindings = useBoardStore((state) => state.showKeyBindings);
+  const setShowKeyBindings = useBoardStore((state) => state.setShowKeyBindings);
+  const showNotes = useBoardStore((state) => state.showNotes);
+  const setShowNotes = useBoardStore((state) => state.setShowNotes);
+
   return (
     <div>
       <div className="flex gap-2 items-center">

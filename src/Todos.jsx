@@ -1,5 +1,5 @@
 export const Todos = () => (
-  <div>
+  <div className="border-t border-dashed border-pink-200 my-3 py-3">
     <h2 className="font-mono text-lg">Todos</h2>
     <ul className="px-4">
       <li className=" list-disc">Validation to prevent duplicate bindings</li>
