@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import * as Tone from "tone";
 import { Button } from "./Button";
 import { Config } from "./Config";
@@ -11,7 +11,6 @@ function App() {
   const buttons = useBoardStore((store) => store.buttons);
   const loops = useBoardStore((store) => store.loops);
   const isInputActive = useBoardStore((store) => store.isInputActive);
-  console.log({ buttons, loops });
 
   useEffect(() => {
     const playNote = (elem) => {
