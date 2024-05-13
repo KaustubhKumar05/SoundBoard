@@ -64,41 +64,67 @@ export const UpdatePad = () => {
         value={updatedInterval}
         onChange={(e) => setUpdatedInterval(e.target.value)}
       />
-      <input
-        type="submit"
-        value="Update"
-        onClick={(e) => {
-          e.preventDefault();
-          setSelectedPad(null);
-          const updatedPad = {
-            note: updatedNote,
-            keyBinding: updatedKeyBinding,
-            interval: updatedInterval,
-          };
-          if (updatedInterval) {
-            const updateIndex = loops.findIndex(
-              (loop) => loop.id === selectedPad.id
-            );
-            const updatedLoops = [...loops];
-            updatedLoops[updateIndex] = {
-              ...updatedLoops[updateIndex],
-              ...updatedPad,
+      <div className="flex gap-3">
+        <input
+          type="submit"
+          value="Update"
+          onClick={(e) => {
+            e.preventDefault();
+            setSelectedPad(null);
+            const updatedPad = {
+              note: updatedNote,
+              keyBinding: updatedKeyBinding,
+              interval: updatedInterval,
             };
-            setLoops(updatedLoops);
-          } else {
-            const updateIndex = buttons.findIndex(
-              (button) => button.id === selectedPad.id
-            );
-            const updatedButtons = [...buttons];
-            updatedButtons[updateIndex] = {
-              ...updatedButtons[updateIndex],
-              ...updatedPad,
-            };
-            setButtons(updatedButtons);
-          }
-        }}
-        className="block bg-red-200 w-full p-4 font-mono text-lg cursor-pointer hover:bg-red-300 rounded"
-      />
+            if (updatedInterval) {
+              const updateIndex = loops.findIndex(
+                (loop) => loop.id === selectedPad.id
+              );
+              const updatedLoops = [...loops];
+              updatedLoops[updateIndex] = {
+                ...updatedLoops[updateIndex],
+                ...updatedPad,
+              };
+              setLoops(updatedLoops);
+            } else {
+              const updateIndex = buttons.findIndex(
+                (button) => button.id === selectedPad.id
+              );
+              const updatedButtons = [...buttons];
+              updatedButtons[updateIndex] = {
+                ...updatedButtons[updateIndex],
+                ...updatedPad,
+              };
+              setButtons(updatedButtons);
+            }
+          }}
+          className="block bg-red-200 w-full p-4 font-mono text-lg cursor-pointer hover:bg-red-300 rounded"
+        />
+        <input
+          type="submit"
+          value="Delete"
+          onClick={(e) => {
+            e.preventDefault();
+            if (selectedPad.interval) {
+              const updateIndex = loops.findIndex(
+                (loop) => loop.id === selectedPad.id
+              );
+              const updatedLoops = [...loops];
+              updatedLoops.splice(updateIndex, 1);
+              setLoops(updatedLoops);
+            } else {
+              const updateIndex = buttons.findIndex(
+                (button) => button.id === selectedPad.id
+              );
+              const updatedButtons = [...buttons];
+              updatedButtons.splice(updateIndex, 1);
+              setButtons(updatedButtons);
+            }
+            setSelectedPad(null);
+          }}
+          className="block bg-red-200 w-full p-4 font-mono text-lg cursor-pointer hover:bg-red-300 rounded"
+        />
+      </div>
     </form>
   );
 };
