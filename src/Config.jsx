@@ -2,7 +2,7 @@ import { BoardMetadata } from "./BoardMetadata";
 import { AddPad } from "./AddPad";
 import { UpdatePad } from "./UpdatePad";
 import { Settings } from "./Settings";
-import { Todos } from "./Todos";
+// import { Todos } from "./Todos";
 
 export const Config = () => {
   return (
@@ -11,7 +11,7 @@ export const Config = () => {
       <Settings />
       <AddPad />
       <UpdatePad />
-      <Todos />
+      {/* <Todos /> */}
     </section>
   );
 };
