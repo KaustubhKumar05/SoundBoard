@@ -9,12 +9,13 @@ export const Button = ({
   showKeyBindings,
   setSelectedPad,
   interval,
+  isInputActive = false,
 }) => {
   const intervalRef = useRef(null);
   const buttonRef = useRef(null);
   useEffect(() => {
     const handleLooping = (e) => {
-      if (e.key === keyBinding && interval) {
+      if (e.key === keyBinding && interval && !isInputActive) {
         if (!intervalRef.current) {
           intervalRef.current = setInterval(() => {
             const classesToToggle = [
@@ -45,7 +46,7 @@ export const Button = ({
     return () => {
       window.removeEventListener("keypress", handleLooping);
     };
-  }, [interval, keyBinding]);
+  }, [interval, isInputActive, keyBinding]);
 
   return (
     <button
@@ -54,7 +55,7 @@ export const Button = ({
       onClick={playNote}
       onContextMenu={(e) => {
         e.preventDefault();
-        setSelectedPad({ note, keyBinding, interval });
+        setSelectedPad({ note, keyBinding, interval, id });
       }}
       className={`py-2 h-24 w-24 rounded ${
         interval
@@ -62,7 +63,9 @@ export const Button = ({
           : "bg-red-100 hover:bg-red-300 focus:bg-red-200 border-pink-300"
       } focus:outline-none border flex flex-col gap-2 items-center justify-center`}
     >
-      {showNotes && <p className="font-mono font-semibold text-xl">{note}</p>}
+      {showNotes && (
+        <p className="font-mono font-semibold text-xl uppercase">{note}</p>
+      )}
       {showKeyBindings && (
         <div className="flex gap-3">
           <p className="font-thin uppercase">{keyBinding}</p>

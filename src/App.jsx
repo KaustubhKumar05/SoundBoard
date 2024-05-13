@@ -9,27 +9,30 @@ const synth = new Tone.Synth().toDestination();
 function App() {
   const [showNotes, setShowNotes] = useState(true);
   const [showKeyBindings, setShowKeyBindings] = useState(true);
-  const [selectedPad, setSelectedPad] = useState(null);
+  const [selectedPad, setSelectedPad] = useState("");
   const [isInputActive, setIsInputActive] = useState(false);
 
   const [boardConfig, setBoardConfig] = useState({
     buttons: [
-      { keyBinding: "q", note: "C4", duration: "8n" },
-      { keyBinding: "w", note: "E4", duration: "8n" },
-      { keyBinding: "e", note: "G4", duration: "8n" },
-      { keyBinding: "a", note: "C5", duration: "8n" },
-      { keyBinding: "s", note: "E5", duration: "8n" },
-      { keyBinding: "d", note: "G5", duration: "8n" },
+      { keyBinding: "q", note: "C4", duration: "8n", id: "asdf" },
+      { keyBinding: "w", note: "E4", duration: "8n", id: "qwe" },
+      { keyBinding: "e", note: "G4", duration: "8n", id: "rewrwes" },
+      { keyBinding: "r", note: "C5", duration: "8n", id: "rewd" },
+      { keyBinding: "a", note: "D4", duration: "8n", id: "refdw" },
+      { keyBinding: "s", note: "A4", duration: "8n", id: "tgfv" },
+      { keyBinding: "d", note: "E5", duration: "8n", id: "yi" },
+      { keyBinding: "f", note: "G5", duration: "8n", id: "iuo" },
+      { keyBinding: "z", note: "D5", duration: "8n", id: "fdsgz" },
+      { keyBinding: "x", note: "A5", duration: "8n", id: "lk" },
+      { keyBinding: "c", note: "E6", duration: "8n", id: "ryt" },
+      { keyBinding: "v", note: "C6", duration: "8n", id: "cvxb" },
     ],
     loops: [
-      { keyBinding: "o", note: "C4", duration: "8n", interval: 1 },
-      { keyBinding: "p", note: "E4", duration: "8n", interval: 1 },
+      { keyBinding: "p", note: "C1", duration: "8n", interval: 1, id: "ihj" },
+      { keyBinding: "l", note: "E2", duration: "8n", interval: 1, id: "jbhkn" },
+      { keyBinding: "m", note: "C3", duration: "8n", interval: 1, id: "dsf" },
     ],
   });
-
-  const [columns, setColumns] = useState(
-    Math.ceil(boardConfig.buttons.length / 2)
-  );
 
   useEffect(() => {
     const playNote = (elem) => {
@@ -49,11 +52,11 @@ function App() {
         (button) => button.keyBinding === e.key
       );
       if (correspondingButton && !isInputActive) {
-        const elem = document.getElementById(correspondingButton.note);
+        const elem = document.getElementById(correspondingButton.id);
         playNote(elem);
       }
     };
-    setColumns(Math.ceil(boardConfig.buttons.length / 2));
+
     window.addEventListener("keypress", keyBindingHandler);
     return () => window.removeEventListener("keypress", keyBindingHandler);
   }, [boardConfig, isInputActive]);
@@ -71,15 +74,19 @@ function App() {
     >
       <section
         className={
-          "board gap-2 grid grid-rows-2 bg-white p-2 rounded-lg border border-pink-100"
+          "board gap-2 grid grid-rows-3 bg-white p-2 rounded-lg border border-pink-100"
         }
-        style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}
+        style={{
+          gridTemplateColumns: `repeat(${Math.ceil(
+            boardConfig.buttons.length / 3
+          )}, 1fr)`,
+        }}
       >
         {boardConfig.buttons.map((button) => (
           <Button
             {...button}
-            key={button.note}
-            id={button.note}
+            key={button.id}
+            id={button.id}
             playNote={() => {
               synth.triggerAttackRelease(button.note, button.duration);
             }}
@@ -90,15 +97,18 @@ function App() {
         ))}
       </section>
       <section
-        className={`board gap-2 grid grid-rows-2 grid-cols-${Math.ceil(
-          boardConfig.loops.length / 2
-        )} bg-white p-2 rounded-lg border border-pink-100`}
+        className={`board gap-2 grid grid-rows-3 bg-white p-2 rounded-lg border border-pink-100`}
+        style={{
+          gridTemplateColumns: `repeat(${Math.ceil(
+            boardConfig.loops.length / 3
+          )}, 1fr`,
+        }}
       >
         {boardConfig.loops.map((button) => (
           <Button
             {...button}
-            key={button.note}
-            id={button.note}
+            key={button.id}
+            id={button.id}
             playNote={() => {
               synth.triggerAttackRelease(button.note, button.duration);
             }}
@@ -106,6 +116,7 @@ function App() {
             showKeyBindings={showKeyBindings}
             showNotes={showNotes}
             setSelectedPad={setSelectedPad}
+            isInputActive={isInputActive}
           />
         ))}
       </section>
