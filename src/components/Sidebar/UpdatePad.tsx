@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import useBoardStore from "../store";
+import useBoardStore from "../../store";
 
 export const UpdatePad = () => {
   const selectedPad = useBoardStore((state) => state.selectedPad);

@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import * as Tone from "tone";
-import { Button } from "./Button";
-import { Config } from "./Config";
-import "./App.css";
+import { Button } from "./components/Board/Button";
+import { Config } from "./components/Sidebar/Config";
 import useBoardStore from "./store";
+import "./styles/index.css";
 
 const synth = new Tone.Synth().toDestination();
 

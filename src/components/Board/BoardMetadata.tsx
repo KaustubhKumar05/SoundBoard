@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useBoardStore from "../store";
+import useBoardStore from "../../store";
 
 export const BoardMetadata = () => {
   const setIsInputActive = useBoardStore((state) => state.setIsInputActive);
