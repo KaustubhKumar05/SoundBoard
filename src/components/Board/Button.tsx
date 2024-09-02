@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import useBoardStore from "../../store";
+import useBoardStore from "../../store/index";
 
 export const Button = ({
   note,

@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { BoardStore, ButtonConfig, PadConfig } from "../types";
+import { BoardStore, ButtonConfig, PadConfig } from "../types/index";
 
 const useBoardStore = create<BoardStore>((set) => ({
   buttons: [

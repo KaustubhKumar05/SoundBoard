@@ -1,5 +1,5 @@
 import React from "react";
-import useBoardStore from "../../store";
+import useBoardStore from "../../store/index";
 
 export const Settings = () => {
   const showKeyBindings = useBoardStore((state) => state.showKeyBindings);

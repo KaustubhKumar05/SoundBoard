@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useBoardStore from "../../store";
+import useBoardStore from "../../store/index";
 
 export const AddPad = () => {
   const loops = useBoardStore((state) => state.loops);

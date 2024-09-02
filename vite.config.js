@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [
     react(),
     ts({
-      tsConfigFile: "tsconfig.json", // path to your tsconfig file
+      tsConfigFile: "tsconfig.json",
     }),
   ],
 });
