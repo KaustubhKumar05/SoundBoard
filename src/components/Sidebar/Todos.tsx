@@ -10,8 +10,9 @@ export const Todos = () => (
       <li className="list-disc">Convert yt track to a board</li>
       <li className="list-disc">Fork tracks and boards</li>
       <li className="list-disc">Script and publish tracks</li>
-      <li className="list-disc">Customisable UI</li>
-      <li className="list-disc">Leaderboard</li>
+      <li className="list-disc">Refactor buttons and fix duration</li>
+      <li className="list-disc">// Customisable UI</li>
+      <li className="list-disc">// Leaderboard</li>
     </ul>
   </div>
 );
