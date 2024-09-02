@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import * as Tone from "tone";
 import { Button } from "./Button";
 import { Config } from "./Config";

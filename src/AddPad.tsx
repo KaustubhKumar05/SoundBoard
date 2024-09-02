@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import useBoardStore from "./store";
 
 export const AddPad = () => {
@@ -10,7 +10,7 @@ export const AddPad = () => {
 
   const [newNote, setNewNote] = useState("");
   const [newKeyBinding, setNewKeyBinding] = useState("");
-  const [newInterval, setNewInterval] = useState("");
+  const [newInterval, setNewInterval] = useState<number | undefined>(undefined);
 
   return (
     <form className="flex flex-col gap-3 border-t border-pink-200 my-3 py-3 border-dashed">
@@ -40,7 +40,7 @@ export const AddPad = () => {
         className="border-b-2 border-pink-300 focus:outline-none focus:border-red-500 uppercase"
         placeholder="Interval in seconds"
         value={newInterval}
-        onChange={(e) => setNewInterval(e.target.value)}
+        onChange={(e) => setNewInterval(parseInt(e.target.value))}
         required
         onFocus={() => setIsInputActive(true)}
         onBlur={() => setIsInputActive(false)}
@@ -55,7 +55,7 @@ export const AddPad = () => {
               keyBinding: newKeyBinding.toLowerCase(),
               note: newNote.toUpperCase(),
               duration: "8n",
-              interval: newInterval,
+              interval: newInterval || undefined,
               id: crypto.randomUUID(),
             };
             if (newInterval) {
@@ -66,7 +66,7 @@ export const AddPad = () => {
           }
           setNewKeyBinding("");
           setNewNote("");
-          setNewInterval("");
+          setNewInterval(undefined);
         }}
         className="block bg-red-200 w-full p-4 font-mono text-lg cursor-pointer hover:bg-red-300 rounded"
       />

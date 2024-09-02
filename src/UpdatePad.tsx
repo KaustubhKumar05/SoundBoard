@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import useBoardStore from "./store";
 
 export const UpdatePad = () => {
@@ -12,13 +12,13 @@ export const UpdatePad = () => {
 
   const [updatedNote, setUpdatedNote] = useState("");
   const [updatedKeyBinding, setUpdatedKeyBinding] = useState("");
-  const [updatedInterval, setUpdatedInterval] = useState("");
+  const [updatedInterval, setUpdatedInterval] = useState<number | undefined>(undefined);
 
   useEffect(() => {
     if (selectedPad) {
       setUpdatedNote(selectedPad.note);
       setUpdatedKeyBinding(selectedPad.keyBinding);
-      setUpdatedInterval(selectedPad.interval || "");
+      setUpdatedInterval(selectedPad.interval || 0);
     }
   }, [selectedPad]);
 
@@ -62,7 +62,7 @@ export const UpdatePad = () => {
         onFocus={() => setIsInputActive(true)}
         onBlur={() => setIsInputActive(false)}
         value={updatedInterval}
-        onChange={(e) => setUpdatedInterval(e.target.value)}
+        onChange={(e) => setUpdatedInterval(parseInt(e.target.value))}
       />
       <div className="flex gap-3">
         <input

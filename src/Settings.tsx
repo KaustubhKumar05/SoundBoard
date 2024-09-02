@@ -1,3 +1,4 @@
+import React from "react";
 import useBoardStore from "./store";
 
 export const Settings = () => {

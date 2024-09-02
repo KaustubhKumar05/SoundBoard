@@ -1,9 +1,21 @@
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import useBoardStore from "./store";
 
-export const Button = ({ note, playNote, keyBinding, id, interval }) => {
-  const intervalRef = useRef(null);
-  const buttonRef = useRef(null);
+export const Button = ({
+  note,
+  playNote,
+  keyBinding,
+  id,
+  interval,
+}: {
+  note: string;
+  playNote: () => void;
+  keyBinding: string;
+  id: string;
+  interval?: number;
+}) => {
+  const intervalRef = useRef<number | null>(null);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
   const isInputActive = useBoardStore((state) => state.isInputActive);
   const showNotes = useBoardStore((state) => state.showNotes);
   const showKeyBindings = useBoardStore((state) => state.showKeyBindings);
@@ -20,16 +32,16 @@ export const Button = ({ note, playNote, keyBinding, id, interval }) => {
               "scale-105",
             ];
             classesToToggle.forEach((className) =>
-              buttonRef.current.classList.toggle(className)
+              buttonRef.current?.classList.toggle(className)
             );
 
-            buttonRef.current.click();
+            buttonRef.current?.click();
 
             setTimeout(() => {
               classesToToggle.forEach((className) =>
-                buttonRef.current.classList.toggle(className)
+                buttonRef.current?.classList.toggle(className)
               );
-              buttonRef.current.blur();
+              buttonRef.current?.blur();
             }, 200);
           }, interval * 1000);
         } else {
@@ -51,7 +63,7 @@ export const Button = ({ note, playNote, keyBinding, id, interval }) => {
       onClick={playNote}
       onContextMenu={(e) => {
         e.preventDefault();
-        setSelectedPad({ note, keyBinding, interval, id });
+        setSelectedPad({ note, keyBinding, interval, id, duration: "8n" });
       }}
       className={`py-2 h-24 w-24 rounded ${
         interval

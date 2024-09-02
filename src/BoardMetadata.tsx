@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import useBoardStore from "./store";
 
 export const BoardMetadata = () => {
@@ -19,9 +19,7 @@ export const BoardMetadata = () => {
       <input
         type="submit"
         value="Save Board"
-        onClick={(e) => {
-          e.preventDefault();
-        }}
+        onClick={(e) => e.preventDefault()}
         className="block bg-red-200 w-full p-4 font-mono text-lg cursor-pointer hover:bg-red-300 rounded"
       />
     </form>

@@ -1,3 +1,4 @@
+import React from "react";
 import { BoardMetadata } from "./BoardMetadata";
 import { AddPad } from "./AddPad";
 import { UpdatePad } from "./UpdatePad";

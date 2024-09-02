@@ -1,6 +1,7 @@
 import { create } from "zustand";
+import { BoardStore, ButtonConfig, PadConfig } from "./types";
 
-const useBoardStore = create((set) => ({
+const useBoardStore = create<BoardStore>((set) => ({
   buttons: [
     { keyBinding: "q", note: "C4", duration: "8n", id: "asdf" },
     { keyBinding: "w", note: "E4", duration: "8n", id: "qwe" },
@@ -15,21 +16,22 @@ const useBoardStore = create((set) => ({
     { keyBinding: "c", note: "E6", duration: "8n", id: "ryt" },
     { keyBinding: "v", note: "C6", duration: "8n", id: "cvxb" },
   ],
-  setButtons: (updatedButtons) => set({ buttons: updatedButtons }),
+  setButtons: (updatedButtons: ButtonConfig[]) =>
+    set({ buttons: updatedButtons }),
   loops: [
     { keyBinding: "p", note: "C1", duration: "8n", interval: 1, id: "ihj" },
     { keyBinding: "l", note: "E2", duration: "8n", interval: 1, id: "jbhkn" },
     { keyBinding: "m", note: "C3", duration: "8n", interval: 1, id: "dsf" },
   ],
-  setLoops: (updatedLoops) => set({ loops: updatedLoops }),
+  setLoops: (updatedLoops: ButtonConfig[]) => set({ loops: updatedLoops }),
   isInputActive: false,
-  setIsInputActive: (bool) => set({ isInputActive: bool }),
+  setIsInputActive: (bool: boolean) => set({ isInputActive: bool }),
   selectedPad: null,
-  setSelectedPad: (pad) => set({ selectedPad: pad }),
+  setSelectedPad: (pad: PadConfig) => set({ selectedPad: pad }),
   showNotes: true,
-  setShowNotes: (bool) => set({ showNotes: bool }),
+  setShowNotes: (bool: boolean) => set({ showNotes: bool }),
   showKeyBindings: true,
-  setShowKeyBindings: (bool) => set({ showKeyBindings: bool }),
+  setShowKeyBindings: (bool: boolean) => set({ showKeyBindings: bool }),
 }));
 
 export default useBoardStore;
