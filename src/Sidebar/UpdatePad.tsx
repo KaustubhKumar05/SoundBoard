@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import useBoardStore from "./store";
+import useBoardStore from "../store";
 
 export const UpdatePad = () => {
   const selectedPad = useBoardStore((state) => state.selectedPad);
@@ -12,7 +12,9 @@ export const UpdatePad = () => {
 
   const [updatedNote, setUpdatedNote] = useState("");
   const [updatedKeyBinding, setUpdatedKeyBinding] = useState("");
-  const [updatedInterval, setUpdatedInterval] = useState<number | undefined>(undefined);
+  const [updatedInterval, setUpdatedInterval] = useState<number | undefined>(
+    undefined
+  );
 
   useEffect(() => {
     if (selectedPad) {

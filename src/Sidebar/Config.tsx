@@ -1,5 +1,5 @@
 import React from "react";
-import { BoardMetadata } from "./BoardMetadata";
+import { BoardMetadata } from "../Board/BoardMetadata";
 import { AddPad } from "./AddPad";
 import { UpdatePad } from "./UpdatePad";
 import { Settings } from "./Settings";
