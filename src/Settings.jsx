@@ -12,7 +12,7 @@ export const Settings = () => {
         <input
           type="checkbox"
           checked={showNotes}
-          onChange={() => setShowNotes((prev) => !prev)}
+          onChange={() => setShowNotes(!showNotes)}
           className="h-4 w-4"
         />
         <p className="font-mono">Show notes</p>
@@ -21,7 +21,7 @@ export const Settings = () => {
         <input
           type="checkbox"
           checked={showKeyBindings}
-          onChange={() => setShowKeyBindings((prev) => !prev)}
+          onChange={() => setShowKeyBindings(!showKeyBindings)}
           className="h-4 w-4"
         />
         <p className="font-mono">Show key bindings</p>
