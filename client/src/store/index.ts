@@ -2,6 +2,8 @@ import { create } from "zustand";
 import { BoardStore, ButtonConfig, PadConfig } from "../types/index";
 
 const useBoardStore = create<BoardStore>((set) => ({
+  boardList: [],
+  setBoardList: (newList: string[]) => set({ boardList: newList }),
   buttons: [
     { keyBinding: "q", note: "C4", duration: "8n", id: "asdf" },
     { keyBinding: "w", note: "E4", duration: "8n", id: "qwe" },

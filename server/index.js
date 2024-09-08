@@ -1,5 +1,5 @@
 const express = require("express");
-const cors = require('cors');
+// const cors = require('cors');
 const redis = require("redis");
 
 require("dotenv").config();
@@ -7,19 +7,19 @@ require("dotenv").config();
 const app = express();
 app.use(express.json());
 
-const allowedOrigins = ["https://soundb0red.vercel.app/"];
+// const allowedOrigins = ["https://soundb0red.vercel.app/"];
 
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
-      return callback(new Error("Not allowed by CORS"));
-    },
-  })
-);
+// app.use(
+//   cors({
+//     origin: (origin, callback) => {
+//       if (!origin) return callback(null, true);
+//       if (allowedOrigins.includes(origin)) {
+//         return callback(null, true);
+//       }
+//       return callback(new Error("Not allowed by CORS"));
+//     },
+//   })
+// );
 
 const client = redis.createClient({
   password: process.env.REDIS_PASSWORD,

@@ -6,11 +6,12 @@ export type ButtonConfig = {
   interval?: number;
 };
 
-
-export type PadConfig = ButtonConfig  | null;
+export type PadConfig = ButtonConfig | null;
 
 export type BoardStore = {
   buttons: ButtonConfig[];
+  boardList: string[];
+  setBoardList: (newList: string[]) => void;
   setButtons: (updatedButtons: ButtonConfig[]) => void;
   loops: ButtonConfig[];
   setLoops: (updatedLoops: ButtonConfig[]) => void;
