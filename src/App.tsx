@@ -1,43 +1,12 @@
-import React, { useEffect } from "react";
-import * as Tone from "tone";
+import React from "react";
 import { Button } from "./components/Board/Button";
 import { Config } from "./components/Sidebar/Config";
 import useBoardStore from "./store";
 import "./styles/index.css";
 
-const synth = new Tone.Synth().toDestination();
-
 function App() {
   const buttons = useBoardStore((store) => store.buttons);
   const loops = useBoardStore((store) => store.loops);
-  const isInputActive = useBoardStore((store) => store.isInputActive);
-
-  useEffect(() => {
-    const playNote = (elem) => {
-      const classesToToggle = ["bg-red-200", "bg-red-100", "scale-105"];
-      classesToToggle.forEach((className) => elem.classList.toggle(className));
-      elem.click();
-
-      setTimeout(() => {
-        classesToToggle.forEach((className) =>
-          elem.classList.toggle(className)
-        );
-        elem.blur();
-      }, 200);
-    };
-    const keyBindingHandler = (e) => {
-      const correspondingButton = buttons?.find(
-        (button) => button.keyBinding === e.key
-      );
-      if (correspondingButton && !isInputActive) {
-        const elem = document.getElementById(correspondingButton.id);
-        playNote(elem);
-      }
-    };
-
-    window.addEventListener("keypress", keyBindingHandler);
-    return () => window.removeEventListener("keypress", keyBindingHandler);
-  }, [buttons, isInputActive]);
 
   return (
     <main
@@ -59,14 +28,7 @@ function App() {
         }}
       >
         {buttons.map((button) => (
-          <Button
-            {...button}
-            key={button.id}
-            id={button.id}
-            playNote={() => {
-              synth.triggerAttackRelease(button.note, button.duration);
-            }}
-          />
+          <Button config={button} key={button.id} id={button.id} />
         ))}
       </section>
       <section
@@ -76,15 +38,7 @@ function App() {
         }}
       >
         {loops.map((button) => (
-          <Button
-            {...button}
-            key={button.id}
-            id={button.id}
-            playNote={() => {
-              synth.triggerAttackRelease(button.note, button.duration);
-            }}
-            interval={button.interval}
-          />
+          <Button config={button} key={button.id} id={button.id} />
         ))}
       </section>
       <Config />

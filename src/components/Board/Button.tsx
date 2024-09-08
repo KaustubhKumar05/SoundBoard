@@ -1,83 +1,44 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import useBoardStore from "../../store/index";
+import { useButton } from "../../hooks/useButton";
+import { ButtonConfig } from "../../types";
 
 export const Button = ({
-  note,
-  playNote,
-  keyBinding,
+  config,
   id,
-  interval,
 }: {
-  note: string;
-  playNote: () => void;
-  keyBinding: string;
+  config: ButtonConfig;
   id: string;
-  interval?: number;
 }) => {
-  const intervalRef = useRef<number | null>(null);
-  const buttonRef = useRef<HTMLButtonElement | null>(null);
-  const isInputActive = useBoardStore((state) => state.isInputActive);
   const showNotes = useBoardStore((state) => state.showNotes);
   const showKeyBindings = useBoardStore((state) => state.showKeyBindings);
   const setSelectedPad = useBoardStore((state) => state.setSelectedPad);
-
-  useEffect(() => {
-    const handleLooping = (e) => {
-      if (e.key === keyBinding && interval && !isInputActive) {
-        if (!intervalRef.current) {
-          intervalRef.current = setInterval(() => {
-            const classesToToggle = [
-              "bg-purple-200",
-              "bg-purple-100",
-              "scale-105",
-            ];
-            classesToToggle.forEach((className) =>
-              buttonRef.current?.classList.toggle(className)
-            );
-
-            buttonRef.current?.click();
-
-            setTimeout(() => {
-              classesToToggle.forEach((className) =>
-                buttonRef.current?.classList.toggle(className)
-              );
-              buttonRef.current?.blur();
-            }, 200);
-          }, interval * 1000);
-        } else {
-          clearInterval(intervalRef.current);
-          intervalRef.current = null;
-        }
-      }
-    };
-    window.addEventListener("keypress", handleLooping);
-    return () => {
-      window.removeEventListener("keypress", handleLooping);
-    };
-  }, [interval, isInputActive, keyBinding]);
+  useButton(config);
 
   return (
     <button
-      ref={buttonRef}
       id={id}
-      onClick={playNote}
       onContextMenu={(e) => {
         e.preventDefault();
-        setSelectedPad({ note, keyBinding, interval, id, duration: "8n" });
+        setSelectedPad({ ...config, id, duration: "8n" });
       }}
       className={`py-2 h-24 w-24 rounded ${
-        interval
+        config.interval
           ? "bg-purple-100 hover:bg-purple-300 focus:bg-purple-200 border-purple-300"
           : "bg-red-100 hover:bg-red-300 focus:bg-red-200 border-pink-300"
       } focus:outline-none border flex flex-col gap-2 items-center justify-center`}
     >
       {showNotes && (
-        <p className="font-mono font-semibold text-xl uppercase">{note}</p>
+        <p className="font-mono font-semibold text-xl uppercase">
+          {config.note}
+        </p>
       )}
       {showKeyBindings && (
         <div className="flex gap-3">
-          <p className="font-thin uppercase">{keyBinding}</p>
-          {interval && <p className="font-thin uppercase">{interval}</p>}
+          <p className="font-thin uppercase">{config.keyBinding}</p>
+          {config.interval && (
+            <p className="font-thin uppercase">{config.interval}</p>
+          )}
         </div>
       )}
     </button>
