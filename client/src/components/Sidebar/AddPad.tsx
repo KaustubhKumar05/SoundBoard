@@ -13,7 +13,7 @@ export const AddPad = () => {
   const [newInterval, setNewInterval] = useState<number | undefined>(undefined);
 
   return (
-    <form className="flex flex-col gap-3 border-t border-pink-200 my-3 py-3 border-dashed">
+    <form className="flex flex-col gap-3 border-t border-pink-200 py-3 border-dashed">
       <h2 className="font-mono text-lg">Add a button/loop</h2>
       <input
         type="text"

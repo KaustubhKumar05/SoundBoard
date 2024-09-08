@@ -8,7 +8,7 @@ export const Settings = () => {
   const setShowNotes = useBoardStore((state) => state.setShowNotes);
 
   return (
-    <div className="border-t border-pink-300 border-dashed my-3 py-3">
+    <div className="border-t border-pink-300 border-dashed py-3">
       <div className="flex gap-2 items-center">
         <input
           type="checkbox"

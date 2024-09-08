@@ -18,10 +18,7 @@ export const Button = ({
   return (
     <button
       id={id}
-      onContextMenu={(e) => {
-        e.preventDefault();
-        setSelectedPad({ ...config, id, duration: "8n" });
-      }}
+      onClick={() => setSelectedPad({ ...config, id, duration: "8n" })}
       className={`py-2 h-24 w-24 rounded ${
         config.interval
           ? "bg-purple-100 hover:bg-purple-300 focus:bg-purple-200 border-purple-300"

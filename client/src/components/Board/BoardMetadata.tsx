@@ -5,7 +5,7 @@ export const BoardMetadata = () => {
   const setIsInputActive = useBoardStore((state) => state.setIsInputActive);
   const [boardName, setBoardName] = useState(`New Board ${Date.now()}`);
   return (
-    <form className="flex flex-col gap-3 my-3 py-3 border-dashed">
+    <form className="flex flex-col gap-3 py-3 border-dashed">
       <input
         type="text"
         className="border-b-2 border-pink-300 focus:outline-none focus:border-red-500 uppercase"

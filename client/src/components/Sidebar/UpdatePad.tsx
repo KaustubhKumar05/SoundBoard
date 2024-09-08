@@ -26,14 +26,14 @@ export const UpdatePad = () => {
 
   if (!selectedPad) {
     return (
-      <h2 className="font-mono text-lg border-t border-pink-200 my-3 py-3 border-dashed">
-        Right click on a button to update
+      <h2 className="font-mono text-lg border-t border-pink-200 py-3 border-dashed">
+        Click on a button to update
       </h2>
     );
   }
 
   return (
-    <form className="flex flex-col gap-3 border-t border-pink-200 my-3 py-3 border-dashed">
+    <form className="flex flex-col gap-3 border-t border-pink-200 py-3 border-dashed">
       <h2 className="font-mono text-lg">
         Update {selectedPad.interval ? "loop" : "button"}
       </h2>
