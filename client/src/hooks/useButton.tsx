@@ -77,6 +77,7 @@ export const useButton = (buttonConfig: ButtonConfig) => {
     return () => {
       window.removeEventListener("keydown", keyBindingHandler);
       window.removeEventListener("keyup", removeFocus);
+      synth.dispose();
     };
   }, [isInputActive]);
   return <></>;
