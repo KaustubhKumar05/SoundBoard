@@ -7,6 +7,7 @@ import { BoardList } from "./BoardList";
 import { DeleteBoard } from "./DeleteBoard";
 import { AddBoard } from "./AddBoard";
 import useBoardStore from "../../store";
+import { Separator } from "./Separator";
 // import { Todos } from "./Todos";
 
 export const Config = () => {
@@ -14,10 +15,14 @@ export const Config = () => {
   return (
     <section className="config h-screen w-96 bg-white fixed right-0 p-4 flex flex-col justify-center">
       <BoardList />
+      <Separator />
       <BoardMetadata />
+      <Separator />
       {selectedPad ? <UpdatePad /> : <AddPad />}
+      <Separator />
       <AddBoard />
       <DeleteBoard />
+      <Separator />
       <Settings />
       {/* <Todos /> */}
     </section>

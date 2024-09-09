@@ -14,9 +14,9 @@ export const BoardList = () => {
   }, []);
 
   return (
-    <div className="border-b border-pink-300 border-dashed flex flex-col gap-2 pb-3">
+    <div className="flex flex-col gap-2 pb-3">
       <label htmlFor="board-select" className="text-lg font-mono">
-        Board List
+        Boards
       </label>
       <select
         disabled={inProgress}

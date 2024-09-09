@@ -24,7 +24,7 @@ export const AddPad = () => {
   const [newInterval, setNewInterval] = useState<number | undefined>(undefined);
 
   return (
-    <form className="flex flex-col gap-3 border-t border-pink-200 py-3 border-dashed">
+    <form className="flex flex-col gap-3">
       <input
         type="text"
         className="border-b-2 border-pink-300 focus:outline-none focus:border-red-500 uppercase"

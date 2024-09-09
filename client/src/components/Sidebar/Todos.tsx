@@ -1,7 +1,7 @@
 import React from "react";
 
 export const Todos = () => (
-  <div className="border-t border-dashed border-pink-200 py-3">
+  <div>
     <h2 className="font-mono text-lg">Todos</h2>
     <ul className="px-4">
       <li className="list-disc">CRUD using Redis</li>
