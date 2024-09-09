@@ -9,6 +9,12 @@ export type ButtonConfig = {
 export type PadConfig = ButtonConfig | null;
 
 export type BoardStore = {
+  hasUnsavedChanges: boolean;
+  setHasUnsavedChanges: (status: boolean) => void;
+  boardName: string;
+  setBoardName: (newName: string) => void;
+  inProgress: boolean;
+  setInProgress: (status: boolean) => void;
   buttons: ButtonConfig[];
   boardList: string[];
   setBoardList: (newList: string[]) => void;

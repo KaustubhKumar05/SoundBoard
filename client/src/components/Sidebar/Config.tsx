@@ -4,6 +4,7 @@ import { AddPad } from "./AddPad";
 import { UpdatePad } from "./UpdatePad";
 import { Settings } from "./Settings";
 import { BoardList } from "./BoardList";
+import { DeleteBoard } from "./DeleteBoard";
 // import { Todos } from "./Todos";
 
 export const Config = () => {
@@ -13,6 +14,7 @@ export const Config = () => {
       <Settings />
       <AddPad />
       <UpdatePad />
+      <DeleteBoard />
       {/* <Todos /> */}
       <BoardList />
     </section>

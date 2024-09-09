@@ -1,12 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useBoardStore from "../../store/index";
 
 export const AddPad = () => {
-  const loops = useBoardStore((state) => state.loops);
-  const setLoops = useBoardStore((state) => state.setLoops);
-  const buttons = useBoardStore((state) => state.buttons);
-  const setButtons = useBoardStore((state) => state.setButtons);
-  const setIsInputActive = useBoardStore((state) => state.setIsInputActive);
+  const [loops, setLoops] = useBoardStore((store) => [
+    store.loops,
+    store.setLoops,
+  ]);
+
+  const [buttons, setButtons] = useBoardStore((store) => [
+    store.buttons,
+    store.setButtons,
+  ]);
+
+  const setHasUnsavedChanges = useBoardStore(
+    (store) => store.setHasUnsavedChanges
+  );
+
+  const setIsInputActive = useBoardStore((store) => store.setIsInputActive);
+  const inProgress = useBoardStore((store) => store.inProgress);
 
   const [newNote, setNewNote] = useState("");
   const [newKeyBinding, setNewKeyBinding] = useState("");
@@ -48,6 +59,7 @@ export const AddPad = () => {
       <input
         type="submit"
         value="Add"
+        disabled={inProgress}
         onClick={(e) => {
           e.preventDefault();
           if (newKeyBinding && newNote) {
@@ -67,8 +79,11 @@ export const AddPad = () => {
           setNewKeyBinding("");
           setNewNote("");
           setNewInterval(undefined);
+          setHasUnsavedChanges(true);
         }}
-        className="block bg-red-200 w-full p-4 font-mono text-lg cursor-pointer hover:bg-red-300 rounded"
+        className={`block bg-red-200 w-full p-4 font-mono text-lg ${
+          inProgress ? "cursor-not-allowed" : "cursor-pointer hover:bg-red-300 "
+        } rounded`}
       />
     </form>
   );

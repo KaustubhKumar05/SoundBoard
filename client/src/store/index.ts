@@ -2,7 +2,13 @@ import { create } from "zustand";
 import { BoardStore, ButtonConfig, PadConfig } from "../types/index";
 
 const useBoardStore = create<BoardStore>((set) => ({
+  hasUnsavedChanges: false,
+  setHasUnsavedChanges: (status: boolean) => set({ hasUnsavedChanges: status }),
+  boardName: "Default",
+  setBoardName: (newName: string) => set({ boardName: newName }),
   boardList: [],
+  inProgress: false,
+  setInProgress: (status: boolean) => set({ inProgress: status }),
   setBoardList: (newList: string[]) => set({ boardList: newList }),
   buttons: [
     { keyBinding: "q", note: "C4", duration: "8n", id: "asdf" },

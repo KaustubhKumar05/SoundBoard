@@ -4,7 +4,6 @@ const cors = require("cors");
 
 require("dotenv").config();
 
-
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -29,7 +28,7 @@ async function startServer() {
       try {
         const { key, config } = req.body;
         await client.set(key, JSON.stringify(config));
-        res.json({ message: "Config saved successfully" });
+        res.status(200).json({ message: "Config saved successfully" });
       } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Error saving config" });

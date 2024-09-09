@@ -2,13 +2,24 @@ import React, { useEffect, useState } from "react";
 import useBoardStore from "../../store/index";
 
 export const UpdatePad = () => {
-  const selectedPad = useBoardStore((state) => state.selectedPad);
-  const setSelectedPad = useBoardStore((state) => state.setSelectedPad);
-  const setIsInputActive = useBoardStore((state) => state.setIsInputActive);
-  const buttons = useBoardStore((state) => state.buttons);
-  const setButtons = useBoardStore((state) => state.setButtons);
-  const loops = useBoardStore((state) => state.loops);
-  const setLoops = useBoardStore((state) => state.setLoops);
+  const [selectedPad, setSelectedPad] = useBoardStore((store) => [
+    store.selectedPad,
+    store.setSelectedPad,
+  ]);
+
+  const setIsInputActive = useBoardStore((store) => store.setIsInputActive);
+  const setHasUnsavedChanges = useBoardStore(
+    (store) => store.setHasUnsavedChanges
+  );
+  const [buttons, setButtons] = useBoardStore((store) => [
+    store.buttons,
+    store.setButtons,
+  ]);
+
+  const [loops, setLoops] = useBoardStore((store) => [
+    store.loops,
+    store.setLoops,
+  ]);
 
   const [updatedNote, setUpdatedNote] = useState("");
   const [updatedKeyBinding, setUpdatedKeyBinding] = useState("");
@@ -99,6 +110,7 @@ export const UpdatePad = () => {
               };
               setButtons(updatedButtons);
             }
+            setHasUnsavedChanges(true);
           }}
           className="block bg-red-200 w-full p-4 font-mono text-lg cursor-pointer hover:bg-red-300 rounded"
         />
