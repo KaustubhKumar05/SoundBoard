@@ -18,6 +18,8 @@ export const DeleteBoard = () => {
   const { deleteBoard } = useDeleteBoard();
   const { fetchBoard } = useFetchBoard();
 
+  const disabled = inProgress || boardList.length < 2;
+
   return (
     <button
       onClick={async () => {
@@ -28,8 +30,10 @@ export const DeleteBoard = () => {
         setHasUnsavedChanges(false);
       }}
       title={boardList.length < 2 ? "At least one board must be present" : ""}
-      disabled={inProgress || boardList.length < 2}
-      className="block bg-red-500 w-full p-4 font-mono text-lg cursor-pointer hover:bg-red-400 rounded"
+      disabled={disabled}
+      className={`block bg-red-500 w-full p-4 my-3 font-mono text-lg ${
+        disabled ? "cursor-not-allowed bg-red-400" : "cursor-pointer"
+      } hover:bg-red-400 rounded`}
     >
       Delete Board
     </button>

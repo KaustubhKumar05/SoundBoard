@@ -37,7 +37,7 @@ export const UpdatePad = () => {
 
   if (!selectedPad) {
     return (
-      <h2 className="font-mono text-lg border-t border-pink-200 py-3 border-dashed">
+      <h2 className="font-mono text-lg border-t border-b border-pink-200 py-3 border-dashed">
         Click on a button to update
       </h2>
     );
@@ -135,6 +135,7 @@ export const UpdatePad = () => {
               setButtons(updatedButtons);
             }
             setSelectedPad(null);
+            setHasUnsavedChanges(true);
           }}
           className="block bg-red-200 w-full p-4 font-mono text-lg cursor-pointer hover:bg-red-300 rounded"
         />

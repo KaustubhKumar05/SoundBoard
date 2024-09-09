@@ -5,6 +5,7 @@ import useBoardStore from "../../store";
 
 export const BoardList = () => {
   const boardName = useBoardStore((store) => store.boardName);
+  const inProgress = useBoardStore((store) => store.inProgress);
   const { boardList, updateBoardList } = useFetchBoardList();
   const { fetchBoard } = useFetchBoard();
 
@@ -13,28 +14,29 @@ export const BoardList = () => {
   }, []);
 
   return (
-    <>
-      <h2 className="text-2xl border-t border-pink-300 border-dashed my-3 pt-3">
+    <div className="border-b border-pink-300 border-dashed flex flex-col gap-2 pb-3">
+      <label htmlFor="board-select" className="text-lg font-mono">
         Board List
-      </h2>
-      <div className="">
+      </label>
+      <select
+        disabled={inProgress}
+        value={boardName}
+        id="board-select"
+        className="border border-pink-300 p-3 pr-0"
+        onChange={async (e) => await fetchBoard(e.target.value)}
+      >
         {boardList.map((board) => (
-          <p
-            className={`font-mono my-1 cursor-pointer ${
-              boardName === board ? "cursor-not-allowed italic" : ""
-            } `}
-            key={board}
-            id={board}
-            onClick={async () => {
-              if (board !== boardName) {
-                await fetchBoard(board);
-              }
-            }}
-          >
-            {board}
-          </p>
+          <option key={board} id={board}>
+            <p
+              className={`font-mono cursor-pointer ${
+                boardName === board ? "cursor-not-allowed italic" : ""
+              } `}
+            >
+              {board}
+            </p>
+          </option>
         ))}
-      </div>
-    </>
+      </select>
+    </div>
   );
 };

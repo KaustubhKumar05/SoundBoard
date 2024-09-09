@@ -25,7 +25,6 @@ export const AddPad = () => {
 
   return (
     <form className="flex flex-col gap-3 border-t border-pink-200 py-3 border-dashed">
-      <h2 className="font-mono text-lg">Add a button/loop</h2>
       <input
         type="text"
         className="border-b-2 border-pink-300 focus:outline-none focus:border-red-500 uppercase"
@@ -49,7 +48,7 @@ export const AddPad = () => {
       <input
         type="number"
         className="border-b-2 border-pink-300 focus:outline-none focus:border-red-500 uppercase"
-        placeholder="Interval in seconds"
+        placeholder="Interval in seconds (optinal)"
         value={newInterval}
         onChange={(e) => setNewInterval(parseInt(e.target.value))}
         required

@@ -4,12 +4,13 @@ import { useSaveBoard } from "../../hooks/useSaveBoard";
 import { useFetchBoardList } from "../../hooks/useFetchBoardList";
 
 export const BoardMetadata = () => {
-  const setIsInputActive = useBoardStore((state) => state.setIsInputActive);
-  const [boardName, setBoardName] = useBoardStore((state) => [
-    state.boardName,
-    state.setBoardName,
+  const setIsInputActive = useBoardStore((store) => store.setIsInputActive);
+  const hasUnsavedChanges = useBoardStore((store) => store.hasUnsavedChanges);
+  const [boardName, setBoardName] = useBoardStore((store) => [
+    store.boardName,
+    store.setBoardName,
   ]);
-  const inProgress = useBoardStore((state) => state.inProgress);
+  const inProgress = useBoardStore((store) => store.inProgress);
   const { saveBoard } = useSaveBoard();
   const { updateBoardList } = useFetchBoardList();
 
@@ -28,7 +29,7 @@ export const BoardMetadata = () => {
       />
       <input
         type="submit"
-        disabled={inProgress}
+        disabled={inProgress || !hasUnsavedChanges}
         value="Save Board"
         onClick={(e) => {
           e.preventDefault();
@@ -36,7 +37,9 @@ export const BoardMetadata = () => {
           updateBoardList();
         }}
         className={`block bg-red-200 w-full p-4 font-mono text-lg ${
-          inProgress ? "cursor-not-allowed" : "cursor-pointer hover:bg-red-300 "
+          inProgress || !hasUnsavedChanges
+            ? "cursor-not-allowed"
+            : "cursor-pointer hover:bg-red-300 "
         } rounded`}
       />
     </form>
