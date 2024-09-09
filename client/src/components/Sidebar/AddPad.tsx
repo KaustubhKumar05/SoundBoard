@@ -48,7 +48,7 @@ export const AddPad = () => {
       <input
         type="number"
         className="border-b-2 border-pink-300 focus:outline-none focus:border-red-500 uppercase"
-        placeholder="Interval in seconds (optinal)"
+        placeholder="Interval in seconds (optional)"
         value={newInterval}
         onChange={(e) => setNewInterval(parseInt(e.target.value))}
         required

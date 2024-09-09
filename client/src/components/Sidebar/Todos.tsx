@@ -7,7 +7,8 @@ export const Todos = () => (
       <li className="list-disc">
         Record and save tracks: sidebar collapses, bottom bar rises
       </li>
-      <li>Track CRUD</li>
+      <li className="list-disc">Tracks CRUD</li>
+      <li className="list-disc">Drag and drop keys</li>
       <li className="list-disc">Convert yt track to a board</li>
       <li className="list-disc">Customisable UI</li>
     </ul>
