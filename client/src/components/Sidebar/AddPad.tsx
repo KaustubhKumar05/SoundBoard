@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import useBoardStore from "../../store/index";
+import { SquarePlus } from "lucide-react";
 
 export const AddPad = () => {
   const [loops, setLoops] = useBoardStore((store) => [
@@ -55,9 +56,8 @@ export const AddPad = () => {
         onFocus={() => setIsInputActive(true)}
         onBlur={() => setIsInputActive(false)}
       />
-      <input
-        type="submit"
-        value="Add"
+      <button
+      title="Add note"
         disabled={inProgress}
         onClick={(e) => {
           e.preventDefault();
@@ -80,10 +80,12 @@ export const AddPad = () => {
           setNewInterval(undefined);
           setHasUnsavedChanges(true);
         }}
-        className={`block bg-red-200 w-full p-4 font-mono text-lg ${
+        className={`flex justify-center bg-red-200 w-full p-4 font-mono text-lg ${
           inProgress ? "cursor-not-allowed" : "cursor-pointer hover:bg-red-300 "
         } rounded`}
-      />
+      >
+        <SquarePlus />
+      </button>
     </form>
   );
 };

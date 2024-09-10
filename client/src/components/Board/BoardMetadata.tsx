@@ -2,6 +2,7 @@ import React from "react";
 import useBoardStore from "../../store/index";
 import { useSaveBoard } from "../../hooks/useSaveBoard";
 import { useFetchBoardList } from "../../hooks/useFetchBoardList";
+import { Save } from "lucide-react";
 
 export const BoardMetadata = () => {
   const setIsInputActive = useBoardStore((store) => store.setIsInputActive);
@@ -15,11 +16,11 @@ export const BoardMetadata = () => {
   const { updateBoardList } = useFetchBoardList();
 
   return (
-    <form className="flex flex-col gap-3">
+    <form className="flex gap-3">
       <input
         type="text"
-        className="border-b-2 border-pink-300 focus:outline-none focus:border-red-500"
-        placeholder="Note"
+        className="border-b-2 border-pink-300 focus:outline-none focus:border-red-500 w-full"
+        placeholder="Board name"
         value={boardName}
         disabled={inProgress}
         onChange={(e) => setBoardName(e.target.value)}
@@ -27,21 +28,21 @@ export const BoardMetadata = () => {
         onFocus={() => setIsInputActive(true)}
         onBlur={() => setIsInputActive(false)}
       />
-      <input
-        type="submit"
+      <button
+        title="Save board"
         disabled={inProgress || !hasUnsavedChanges}
-        value="Save Board"
-        onClick={(e) => {
-          e.preventDefault();
-          saveBoard();
-          updateBoardList();
+        onClick={async () => {
+          await saveBoard();
+          await updateBoardList();
         }}
-        className={`block bg-red-200 w-full p-4 font-mono text-lg ${
+        className={`bg-red-200 p-4 w-max ${
           inProgress || !hasUnsavedChanges
             ? "cursor-not-allowed"
             : "cursor-pointer hover:bg-red-300 "
         } rounded`}
-      />
+      >
+        <Save />
+      </button>
     </form>
   );
 };

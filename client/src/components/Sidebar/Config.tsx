@@ -20,8 +20,10 @@ export const Config = () => {
       <Separator />
       {selectedPad ? <UpdatePad /> : <AddPad />}
       <Separator />
-      <AddBoard />
-      <DeleteBoard />
+      <div className="flex gap-4">
+        <AddBoard />
+        <DeleteBoard />
+      </div>
       <Separator />
       <Settings />
       {/* <Todos /> */}

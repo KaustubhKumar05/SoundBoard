@@ -3,11 +3,6 @@ import useBoardStore from "../store";
 export const useDeleteBoard = () => {
   const setInProgress = useBoardStore((store) => store.setInProgress);
   const boardName = useBoardStore((store) => store.boardName);
-  
-  const [boardList, setBoardList] = useBoardStore((store) => [
-    store.boardList,
-    store.setBoardList,
-  ]);
 
   const deleteBoard = async () => {
     setInProgress(true);

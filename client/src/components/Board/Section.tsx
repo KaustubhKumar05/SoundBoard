@@ -2,7 +2,10 @@ import React from "react";
 import { Button } from "./Button";
 import { ButtonConfig } from "../../types";
 
-export const Section = ({ pads }: { pads: ButtonConfig[] }) => {
+export const Section = ({ pads = [] }: { pads: ButtonConfig[] }) => {
+  if (pads.length === 0) {
+    return <></>;
+  }
   return (
     <section
       className={
