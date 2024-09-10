@@ -31,7 +31,7 @@ export const UpdatePad = () => {
     if (selectedPad) {
       setUpdatedNote(selectedPad.note);
       setUpdatedKeyBinding(selectedPad.keyBinding);
-      setUpdatedInterval(selectedPad.interval || 0);
+      setUpdatedInterval(selectedPad.interval || undefined);
     }
   }, [selectedPad]);
 
