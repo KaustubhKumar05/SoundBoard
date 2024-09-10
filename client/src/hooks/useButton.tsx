@@ -31,10 +31,11 @@ export const useButton = (buttonConfig: ButtonConfig) => {
     };
 
     const keyBindingHandler = (e) => {
+      // e.repeat is ignored to prevent repetition when a key is held down
+      if (e.ctrlKey || e.shiftKey || e.altKey || e.metaKey || e.repeat) {
+        return;
+      }
       if (e.key === buttonConfig.keyBinding && !isInputActive) {
-        // Prevent repeating when key is held down
-        if (e.repeat) return;
-
         if (loop) {
           if (intervalRef.current) {
             clearInterval(intervalRef.current);
