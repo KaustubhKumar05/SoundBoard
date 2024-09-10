@@ -1,5 +1,5 @@
 import React from "react";
-import useBoardStore from "./store";
+import useBoardStore from "./store/board";
 import { Config } from "./components/Sidebar/Config";
 import { Section } from "./components/Board/Section";
 import "./styles/index.css";

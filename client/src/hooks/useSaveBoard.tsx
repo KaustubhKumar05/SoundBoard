@@ -1,12 +1,13 @@
-import useBoardStore from "../store";
+import useAppStore from "../store/app";
+import useBoardStore from "../store/board";
 
 export const useSaveBoard = () => {
-  const boardName = useBoardStore((store) => store.boardName);
-  const setInProgress = useBoardStore((store) => store.setInProgress);
-  const setHasUnsavedChanges = useBoardStore(
+  const setInProgress = useAppStore((store) => store.setInProgress);
+  const setHasUnsavedChanges = useAppStore(
     (store) => store.setHasUnsavedChanges
   );
-
+  
+  const boardName = useBoardStore((store) => store.boardName);
   const [loops, buttons] = useBoardStore((store) => [
     store.loops,
     store.buttons,

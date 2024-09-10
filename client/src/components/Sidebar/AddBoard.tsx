@@ -1,10 +1,11 @@
 import React from "react";
-import useBoardStore from "../../store";
+import useAppStore from "../../store/app";
+import useBoardStore from "../../store/board";
 import { FolderPlus } from "lucide-react";
 
 export const AddBoard = () => {
   const setBoardName = useBoardStore((store) => store.setBoardName);
-  const setHasUnsavedChanges = useBoardStore(
+  const setHasUnsavedChanges = useAppStore(
     (store) => store.setHasUnsavedChanges
   );
   return (

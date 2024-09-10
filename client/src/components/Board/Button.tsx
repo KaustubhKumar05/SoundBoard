@@ -1,8 +1,10 @@
 import React from "react";
-import useBoardStore from "../../store/index";
+import useAppStore from "../../store/app";
+import useBoardStore from "../../store/board";
 import { useButton } from "../../hooks/useButton";
 import { ButtonConfig } from "../../types";
 import { useDragDrop } from "../../hooks/useDragDrop";
+import { DURATION } from "../../constants";
 
 export const Button = ({
   config,
@@ -11,9 +13,11 @@ export const Button = ({
   config: ButtonConfig;
   id: string;
 }) => {
-  const showNotes = useBoardStore((state) => state.showNotes);
-  const showKeyBindings = useBoardStore((state) => state.showKeyBindings);
+  const showNotes = useAppStore((state) => state.showNotes);
+  const showKeyBindings = useAppStore((state) => state.showKeyBindings);
+
   const setSelectedPad = useBoardStore((state) => state.setSelectedPad);
+
   const { handleDrop } = useDragDrop();
 
   useButton(config);
@@ -33,7 +37,7 @@ export const Button = ({
       onDragOver={(e) => e.preventDefault()}
       onDrop={(e) => handleDrop(e, id, !config.interval)}
       id={id}
-      onClick={() => setSelectedPad({ ...config, id, duration: "8n" })}
+      onClick={() => setSelectedPad({ ...config, id, duration: DURATION })}
       className={`py-2 h-24 w-24 rounded ${
         config.interval
           ? "bg-purple-100 hover:bg-purple-300 focus:bg-purple-200 border-purple-300"

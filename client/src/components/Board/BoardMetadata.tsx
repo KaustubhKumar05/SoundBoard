@@ -1,17 +1,20 @@
 import React from "react";
-import useBoardStore from "../../store/index";
+import useAppStore from "../../store/app";
+import useBoardStore from "../../store/board";
 import { useSaveBoard } from "../../hooks/useSaveBoard";
 import { useFetchBoardList } from "../../hooks/useFetchBoardList";
 import { Save } from "lucide-react";
 
 export const BoardMetadata = () => {
-  const setIsInputActive = useBoardStore((store) => store.setIsInputActive);
-  const hasUnsavedChanges = useBoardStore((store) => store.hasUnsavedChanges);
+  const setIsInputActive = useAppStore((store) => store.setIsInputActive);
+  const hasUnsavedChanges = useAppStore((store) => store.hasUnsavedChanges);
+  const inProgress = useAppStore((store) => store.inProgress);
+
   const [boardName, setBoardName] = useBoardStore((store) => [
     store.boardName,
     store.setBoardName,
   ]);
-  const inProgress = useBoardStore((store) => store.inProgress);
+
   const { saveBoard } = useSaveBoard();
   const { updateBoardList } = useFetchBoardList();
 

@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from "react";
+import useAppStore from "../store/app";
 import { ButtonConfig } from "../types";
-import useBoardStore from "../store";
 import * as Tone from "tone";
 
 export const useButton = (buttonConfig: ButtonConfig) => {
-  const isInputActive = useBoardStore((store) => store.isInputActive);
-  const intervalRef = useRef<number | null>(null);
+  const isInputActive = useAppStore((store) => store.isInputActive);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const synth = new Tone.Synth().toDestination();

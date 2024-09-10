@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
-import { useFetchBoardList } from "../../hooks/useFetchBoardList";
+import useAppStore from "../../store/app";
+import useBoardStore from "../../store/board";
 import { useFetchBoard } from "../../hooks/useFetchBoard";
-import useBoardStore from "../../store";
+import { useFetchBoardList } from "../../hooks/useFetchBoardList";
 
 export const BoardList = () => {
+  const inProgress = useAppStore((store) => store.inProgress);
+  
   const boardName = useBoardStore((store) => store.boardName);
-  const inProgress = useBoardStore((store) => store.inProgress);
+
   const { boardList, updateBoardList } = useFetchBoardList();
   const { fetchBoard } = useFetchBoard();
 

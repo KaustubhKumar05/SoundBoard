@@ -1,19 +1,19 @@
-import useBoardStore from "../store";
+import useAppStore from "../store/app";
+import useBoardStore from "../store/board";
 
 export const useDragDrop = () => {
+  const setHasUnsavedChanges = useAppStore(
+    (store) => store.setHasUnsavedChanges
+  );
+
   const [buttons, setButtons] = useBoardStore((store) => [
     store.buttons,
     store.setButtons,
   ]);
-
   const [loops, setLoops] = useBoardStore((store) => [
     store.loops,
     store.setLoops,
   ]);
-
-  const setHasUnsavedChanges = useBoardStore(
-    (store) => store.setHasUnsavedChanges
-  );
 
   const handleDrop = (
     e: React.DragEvent<HTMLButtonElement>,

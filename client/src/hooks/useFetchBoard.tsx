@@ -1,14 +1,14 @@
-import useBoardStore from "../store";
+import useAppStore from "../store/app";
+import useBoardStore from "../store/board";
 
 export const useFetchBoard = () => {
-  const setBoardName = useBoardStore((store) => store.setBoardName);
+  const setInProgress = useAppStore((store) => store.setInProgress);
 
+  const setBoardName = useBoardStore((store) => store.setBoardName);
   const [setButtons, setLoops] = useBoardStore((store) => [
     store.setButtons,
     store.setLoops,
   ]);
-
-  const setInProgress = useBoardStore((store) => store.setInProgress);
 
   const fetchBoard = async (boardName: string) => {
     setInProgress(true);

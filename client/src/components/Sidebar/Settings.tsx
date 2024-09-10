@@ -1,11 +1,11 @@
 import React from "react";
-import useBoardStore from "../../store/index";
+import useAppStore from "../../store/app";
 
 export const Settings = () => {
-  const showKeyBindings = useBoardStore((state) => state.showKeyBindings);
-  const setShowKeyBindings = useBoardStore((state) => state.setShowKeyBindings);
-  const showNotes = useBoardStore((state) => state.showNotes);
-  const setShowNotes = useBoardStore((state) => state.setShowNotes);
+  const showKeyBindings = useAppStore((state) => state.showKeyBindings);
+  const setShowKeyBindings = useAppStore((state) => state.setShowKeyBindings);
+  const showNotes = useAppStore((state) => state.showNotes);
+  const setShowNotes = useAppStore((state) => state.setShowNotes);
 
   return (
     <div>

@@ -1,24 +1,24 @@
 import React, { useState } from "react";
-import useBoardStore from "../../store/index";
+import useAppStore from "../../store/app";
+import useBoardStore from "../../store/board";
 import { SquarePlus } from "lucide-react";
+import { DURATION } from "../../constants";
 
 export const AddPad = () => {
+  const setHasUnsavedChanges = useAppStore(
+    (store) => store.setHasUnsavedChanges
+  );
+  const setIsInputActive = useAppStore((store) => store.setIsInputActive);
+  const inProgress = useAppStore((store) => store.inProgress);
+
   const [loops, setLoops] = useBoardStore((store) => [
     store.loops,
     store.setLoops,
   ]);
-
   const [buttons, setButtons] = useBoardStore((store) => [
     store.buttons,
     store.setButtons,
   ]);
-
-  const setHasUnsavedChanges = useBoardStore(
-    (store) => store.setHasUnsavedChanges
-  );
-
-  const setIsInputActive = useBoardStore((store) => store.setIsInputActive);
-  const inProgress = useBoardStore((store) => store.inProgress);
 
   const [newNote, setNewNote] = useState("");
   const [newKeyBinding, setNewKeyBinding] = useState("");
@@ -57,7 +57,7 @@ export const AddPad = () => {
         onBlur={() => setIsInputActive(false)}
       />
       <button
-      title="Add note"
+        title="Add note"
         disabled={inProgress}
         onClick={(e) => {
           e.preventDefault();
@@ -65,7 +65,7 @@ export const AddPad = () => {
             const newPad = {
               keyBinding: newKeyBinding.toLowerCase(),
               note: newNote.toUpperCase(),
-              duration: "8n",
+              duration: DURATION,
               interval: newInterval || undefined,
               id: crypto.randomUUID(),
             };

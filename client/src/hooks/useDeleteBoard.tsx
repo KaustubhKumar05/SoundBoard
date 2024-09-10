@@ -1,7 +1,9 @@
-import useBoardStore from "../store";
+import useAppStore from "../store/app";
+import useBoardStore from "../store/board";
 
 export const useDeleteBoard = () => {
-  const setInProgress = useBoardStore((store) => store.setInProgress);
+  const setInProgress = useAppStore((store) => store.setInProgress);
+  
   const boardName = useBoardStore((store) => store.boardName);
 
   const deleteBoard = async () => {

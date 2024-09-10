@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
-import useBoardStore from "../../store/index";
+import useAppStore from "../../store/app";
+import useBoardStore from "../../store/board";
 
 export const UpdatePad = () => {
+  const setIsInputActive = useAppStore((store) => store.setIsInputActive);
+  const setHasUnsavedChanges = useAppStore(
+    (store) => store.setHasUnsavedChanges
+  );
+
   const [selectedPad, setSelectedPad] = useBoardStore((store) => [
     store.selectedPad,
     store.setSelectedPad,
   ]);
-
-  const setIsInputActive = useBoardStore((store) => store.setIsInputActive);
-  const setHasUnsavedChanges = useBoardStore(
-    (store) => store.setHasUnsavedChanges
-  );
   const [buttons, setButtons] = useBoardStore((store) => [
     store.buttons,
     store.setButtons,
   ]);
-
   const [loops, setLoops] = useBoardStore((store) => [
     store.loops,
     store.setLoops,

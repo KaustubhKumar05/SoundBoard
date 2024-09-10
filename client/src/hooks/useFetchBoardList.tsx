@@ -1,4 +1,4 @@
-import useBoardStore from "../store";
+import useBoardStore from "../store/board";
 
 export const useFetchBoardList = () => {
   const [boardList, setBoardList] = useBoardStore((store) => [
