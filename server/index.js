@@ -28,10 +28,10 @@ async function startServer() {
       try {
         const { key, config } = req.body;
         await client.set(key, JSON.stringify(config));
-        res.status(200).json({ message: "Config saved successfully" });
+        res.status(200).json({ message: "Board saved successfully" });
       } catch (err) {
         console.error(err);
-        res.status(500).json({ error: "Error saving config" });
+        res.status(500).json({ error: "Error saving board" });
       }
     });
 
@@ -54,11 +54,11 @@ async function startServer() {
         if (reply) {
           res.json(JSON.parse(reply));
         } else {
-          res.status(404).json({ error: "Config not found" });
+          res.status(404).json({ error: "Board not found" });
         }
       } catch (err) {
         console.error(err);
-        res.status(500).json({ error: "Error retrieving config" });
+        res.status(500).json({ error: "Error retrieving board" });
       }
     });
 
@@ -67,16 +67,21 @@ async function startServer() {
       try {
         const { key } = req.params;
         const { config } = req.body;
+        if (key === "Default") {
+          return res
+            .status(400)
+            .json({ error: "Default board cannot be updated" });
+        }
         const exists = await client.exists(key);
         if (exists) {
           await client.set(key, JSON.stringify(config));
-          res.json({ message: "Config updated successfully" });
+          res.json({ message: "Board updated successfully" });
         } else {
-          res.status(404).json({ error: "Config not found" });
+          res.status(404).json({ error: "Board not found" });
         }
       } catch (err) {
         console.error(err);
-        res.status(500).json({ error: "Error updating config" });
+        res.status(500).json({ error: "Error updating board" });
       }
     });
 
@@ -84,15 +89,20 @@ async function startServer() {
     app.delete("/api/boards/:key", async (req, res) => {
       try {
         const { key } = req.params;
+        if (key === "Default") {
+          return res
+            .status(400)
+            .json({ error: "Default board cannot be deleted" });
+        }
         const reply = await client.del(key);
         if (reply === 1) {
-          res.json({ message: "Config deleted successfully" });
+          res.json({ message: "Board deleted successfully" });
         } else {
-          res.status(404).json({ error: "Config not found" });
+          res.status(404).json({ error: "Board not found" });
         }
       } catch (err) {
         console.error(err);
-        res.status(500).json({ error: "Error deleting config" });
+        res.status(500).json({ error: "Error deleting board" });
       }
     });
 

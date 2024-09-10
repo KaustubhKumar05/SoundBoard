@@ -2,6 +2,7 @@ import React from "react";
 import useBoardStore from "../../store/index";
 import { useButton } from "../../hooks/useButton";
 import { ButtonConfig } from "../../types";
+import { useDragDrop } from "../../hooks/useDragDrop";
 
 export const Button = ({
   config,
@@ -13,10 +14,24 @@ export const Button = ({
   const showNotes = useBoardStore((state) => state.showNotes);
   const showKeyBindings = useBoardStore((state) => state.showKeyBindings);
   const setSelectedPad = useBoardStore((state) => state.setSelectedPad);
+  const { handleDrop } = useDragDrop();
+
   useButton(config);
 
   return (
     <button
+      draggable
+      onDragStart={(e) =>
+        e.dataTransfer.setData(
+          "text/plain",
+          JSON.stringify({
+            id,
+            isButton: !config.interval,
+          })
+        )
+      }
+      onDragOver={(e) => e.preventDefault()}
+      onDrop={(e) => handleDrop(e, id, !config.interval)}
       id={id}
       onClick={() => setSelectedPad({ ...config, id, duration: "8n" })}
       className={`py-2 h-24 w-24 rounded ${

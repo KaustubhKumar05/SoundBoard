@@ -1,7 +1,7 @@
 import React from "react";
-import { Button } from "./components/Board/Button";
-import { Config } from "./components/Sidebar/Config";
 import useBoardStore from "./store";
+import { Config } from "./components/Sidebar/Config";
+import { Section } from "./components/Board/Section";
 import "./styles/index.css";
 
 function App() {
@@ -19,30 +19,8 @@ function App() {
         width: "calc(100vw - 384px)",
       }}
     >
-      <section
-        className={
-          "board gap-2 grid grid-rows-3 bg-white p-2 rounded-lg border border-pink-100"
-        }
-        style={{
-          gridTemplateColumns: `repeat(${Math.ceil(buttons.length / 3)}, 1fr)`,
-          gridTemplateRows: `repeat(${Math.ceil(buttons.length % 3)}, 3fr)`,
-        }}
-      >
-        {buttons.map((button) => (
-          <Button config={button} key={button.id} id={button.id} />
-        ))}
-      </section>
-      <section
-        className={`board gap-2 grid bg-white p-2 rounded-lg border border-pink-100`}
-        style={{
-          gridTemplateColumns: `repeat(${Math.ceil(loops.length / 3)}, 1fr)`,
-          gridTemplateRows: `repeat(${Math.ceil(loops.length % 3)}, 3fr)`,
-        }}
-      >
-        {loops.map((button) => (
-          <Button config={button} key={button.id} id={button.id} />
-        ))}
-      </section>
+      <Section pads={buttons} />
+      <Section pads={loops} />
       <Config />
     </main>
   );
