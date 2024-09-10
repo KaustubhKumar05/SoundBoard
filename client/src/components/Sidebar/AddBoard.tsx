@@ -11,7 +11,7 @@ export const AddBoard = () => {
   return (
     <button
       title="Create a new board"
-      className="bg-red-200 p-4 my-3 w-full cursor-pointer hover:bg-red-300 rounded border-t border-pink-300 flex justify-center"
+      className="bg-red-200 p-4 my-3 w-full cursor-pointer hover:bg-red-300 rounded flex justify-center"
       onClick={() => {
         setBoardName(`New Board ${Date.now()}`);
         setHasUnsavedChanges(true);

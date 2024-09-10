@@ -34,4 +34,6 @@ export type AppStore = {
   setShowNotes: (bool: boolean) => void;
   showKeyBindings: boolean;
   setShowKeyBindings: (bool: boolean) => void;
+  isRecording: boolean;
+  setIsRecording: (bool: boolean) => void;
 };

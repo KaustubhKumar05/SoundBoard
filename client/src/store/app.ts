@@ -3,7 +3,7 @@ import { AppStore } from "../types/index";
 import { MODE } from "../constants";
 
 const useAppStore = create<AppStore>((set) => ({
-  currentMode: MODE.RECORDER,
+  currentMode: MODE.BOARD,
   setCurrentMode: (mode: string) => set({ currentMode: mode }),
   hasUnsavedChanges: false,
   setHasUnsavedChanges: (status: boolean) => set({ hasUnsavedChanges: status }),
@@ -15,6 +15,8 @@ const useAppStore = create<AppStore>((set) => ({
   setShowNotes: (bool: boolean) => set({ showNotes: bool }),
   showKeyBindings: true,
   setShowKeyBindings: (bool: boolean) => set({ showKeyBindings: bool }),
+  isRecording: false,
+  setIsRecording: (bool: boolean) => set({ isRecording: bool }),
 }));
 
 export default useAppStore;
