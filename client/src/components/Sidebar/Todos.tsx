@@ -7,12 +7,15 @@ export const Todos = () => (
 
       General improvements: Sept
       <li className="list-disc">Dependabot alerts</li>
+      <li className="list-disc">Secure backend</li>
+      <li className="list-disc">Log actions</li>
       <li className="list-disc">Welcome toasts - click to update keys, drag and drop</li>
       <li className="list-disc">Better toasts, common error message file</li>
       <li className="list-disc">Routes, loading screen</li>
       <li className="list-disc">Handle misclicks - sticky keys</li>
       <li className="list-disc">Clear loops on mode change</li>
       <li className="list-disc">Hide irrelevant options while editing buttons - update, delete, cancel</li>
+      <li className="list-disc">SEO, Favicon</li>
 
       Phase 2: Sept
       <li className="list-disc">
@@ -32,6 +35,7 @@ export const Todos = () => (
       <li className="list-disc">Redis setex</li>
       <li className="list-disc">Limits</li>
       <li className="list-disc">Umami analytics</li>
+      <li className="list-disc">Star boards, tracks</li>
       <li className="list-disc">Schedule MongoDB dumps for backup</li>
       <li className="list-disc">Readme, feature on website</li>
       <li className="list-disc">Search for boards, tracks</li>
