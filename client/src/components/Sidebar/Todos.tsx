@@ -31,6 +31,9 @@ export const Todos = () => (
       <li className="list-disc">Google sign in - not needed to listen, test out a board</li>
       <li className="list-disc">Redis setex</li>
       <li className="list-disc">Limits</li>
+      <li className="list-disc">Umami analytics</li>
+      <li className="list-disc">Schedule MongoDB dumps for backup</li>
+      <li className="list-disc">Readme, feature on website</li>
       <li className="list-disc">Search for boards, tracks</li>
     </ul>
   </div>
