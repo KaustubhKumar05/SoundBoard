@@ -5,10 +5,12 @@ export const Todos = () => (
     <h2 className="font-mono text-lg">Todos</h2>
     <ul className="px-4">
       Improve UX
-      <li className="list-disc">Better toasts</li>
+      <li className="list-disc">Welcome toats - click to update keys, drag and drop</li>
+      <li className="list-disc">Better toasts, common error message file</li>
+      <li className="list-disc">Routes, loading screen</li>
       <li className="list-disc">Handle misclicks - sticky keys</li>
-      <li className="list-disc">Hide irrelevant options while editing buttons - update, delete, cancel</li>
       <li className="list-disc">Clear loops on mode change</li>
+      <li className="list-disc">Hide irrelevant options while editing buttons - update, delete, cancel</li>
       Phase 2
       <li className="list-disc">
         Recording UI - rolling window, buttons: mode | start pause | stop
