@@ -24,7 +24,7 @@ export const useDeleteBoard = () => {
     if (jsonResp.message === "Board deleted successfully") {
       alert("Board deleted successfully");
     } else {
-      alert(jsonResp.error);
+      alert(jsonResp.error || jsonResp.messsage);
     }
     setInProgress(false);
   };
