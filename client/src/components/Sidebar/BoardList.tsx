@@ -23,7 +23,7 @@ export const BoardList = () => {
       </label>
       <select
         disabled={inProgress}
-        value={boardName}
+        value={boardName || "Default"}
         id="board-select"
         className="border border-pink-300 p-3 pr-0"
         onChange={async (e) => await fetchBoard(e.target.value)}
