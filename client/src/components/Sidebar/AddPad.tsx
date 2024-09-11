@@ -58,7 +58,7 @@ export const AddPad = () => {
       />
       <button
         title="Add note"
-        disabled={inProgress}
+        disabled={inProgress || (!newKeyBinding && !newNote)}
         onClick={(e) => {
           e.preventDefault();
           if (newKeyBinding && newNote) {
