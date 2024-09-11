@@ -21,7 +21,7 @@ export const useDeleteBoard = () => {
       }
     );
     const jsonResp = await resp.json();
-    if (jsonResp.message === "Config deleted successfully") {
+    if (jsonResp.message === "Board deleted successfully") {
       alert("Board deleted successfully");
     } else {
       alert(jsonResp.error);

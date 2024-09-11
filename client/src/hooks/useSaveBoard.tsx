@@ -32,7 +32,7 @@ export const useSaveBoard = () => {
     );
 
     const jsonResp = await resp.json();
-    if (jsonResp.message === "Config saved successfully") {
+    if (jsonResp.message === "Board saved successfully") {
       setHasUnsavedChanges(false);
       alert("Board saved successfully");
     } else {
