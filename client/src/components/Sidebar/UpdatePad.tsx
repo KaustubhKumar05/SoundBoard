@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useAppStore from "../../store/app";
 import useBoardStore from "../../store/board";
+import { Delete, Save, SaveOff } from "lucide-react";
 
 export const UpdatePad = () => {
   const setIsInputActive = useAppStore((store) => store.setIsInputActive);
@@ -74,9 +75,8 @@ export const UpdatePad = () => {
         onChange={(e) => setUpdatedInterval(parseInt(e.target.value))}
       />
       <div className="flex gap-3">
-        <input
-          type="submit"
-          value="Update"
+        <button
+          title="Update"
           onClick={(e) => {
             e.preventDefault();
             setSelectedPad(null);
@@ -108,11 +108,24 @@ export const UpdatePad = () => {
             }
             setHasUnsavedChanges(true);
           }}
-          className="block bg-red-200 w-full p-4 font-mono text-lg cursor-pointer hover:bg-red-300 rounded"
-        />
-        <input
-          type="submit"
-          value="Delete"
+          className="flex bg-red-200 w-full p-4 cursor-pointer hover:bg-red-300 rounded justify-center"
+        >
+          <Save />
+        </button>
+
+        <button
+          title="Cancel"
+          onClick={() => {
+            setHasUnsavedChanges(false);
+            setSelectedPad(null);
+          }}
+          className="flex bg-red-200 w-full p-4 cursor-pointer hover:bg-red-300 rounded justify-center"
+        >
+          <SaveOff />
+        </button>
+
+        <button
+          title="Delete"
           onClick={(e) => {
             e.preventDefault();
             if (selectedPad.interval) {
@@ -133,8 +146,10 @@ export const UpdatePad = () => {
             setSelectedPad(null);
             setHasUnsavedChanges(true);
           }}
-          className="block bg-red-200 w-full p-4 font-mono text-lg cursor-pointer hover:bg-red-300 rounded"
-        />
+          className="flex bg-red-200 w-full p-4 cursor-pointer hover:bg-red-300 rounded justify-center"
+        >
+          <Delete />
+        </button>
       </div>
     </form>
   );

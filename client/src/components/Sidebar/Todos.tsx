@@ -11,10 +11,7 @@ export const Todos = () => (
       <li className="list-disc">Better toasts, common error message file</li>
       <li className="list-disc">Handle misclicks - sticky keys</li>
       <li className="list-disc">Clear loops on mode change - spacebar can handle this</li>
-----------------------------------------------------------------
       <li className="list-disc">Routes, loading screen</li>
-      <li className="list-disc">Hide irrelevant options while editing buttons - update, delete, cancel</li>
-      <li className="list-disc">SEO, Favicon</li>
 
       Phase 2: Sept
       <li className="list-disc">
