@@ -28,9 +28,10 @@ async function startServer() {
       try {
         const { key, config } = req.body;
         await client.set(key, JSON.stringify(config));
+        console.log(`Board saved - ${key}`);
         res.status(200).json({ message: "Board saved successfully" });
       } catch (err) {
-        console.error(err);
+        console.error(`Could not save board ${key}`, err);
         res.status(500).json({ error: "Error saving board" });
       }
     });
@@ -39,9 +40,10 @@ async function startServer() {
     app.get("/api/boards", async (_, res) => {
       try {
         const keys = await client.keys("*");
+        console.log(`Fetched ${keys.length} boards`);
         res.json(keys);
       } catch (err) {
-        console.error(err);
+        console.error(`Error fetching board names:`, err);
         res.status(500).json({ error: "Error retrieving boards" });
       }
     });
@@ -52,12 +54,14 @@ async function startServer() {
         const { key } = req.params;
         const reply = await client.get(key);
         if (reply) {
+          console.log(`Fetched config for board - ${key}`);
           res.json(JSON.parse(reply));
         } else {
+          console.log(`Could not find config for board - ${key}`);
           res.status(404).json({ error: "Board not found" });
         }
       } catch (err) {
-        console.error(err);
+        console.error(`Error fetching board - ${key}:`, err);
         res.status(500).json({ error: "Error retrieving board" });
       }
     });
@@ -75,12 +79,14 @@ async function startServer() {
         const exists = await client.exists(key);
         if (exists) {
           await client.set(key, JSON.stringify(config));
+          console.log(`Board updated - ${key}`);
           res.json({ message: "Board updated successfully" });
         } else {
+          console.error(`Board not found - ${key}. Could not be updated`);
           res.status(404).json({ error: "Board not found" });
         }
       } catch (err) {
-        console.error(err);
+        console.error(`Error updating board ${key}:`, err);
         res.status(500).json({ error: "Error updating board" });
       }
     });
@@ -96,12 +102,14 @@ async function startServer() {
         }
         const reply = await client.del(key);
         if (reply === 1) {
+          console.log(`Board deleted - ${key}`);
           res.json({ message: "Board deleted successfully" });
         } else {
+          console.log(`Board not found for deletion - ${key}`);
           res.status(404).json({ error: "Board not found" });
         }
       } catch (err) {
-        console.error(err);
+        console.error(`Error deleting board ${key}:`,err);
         res.status(500).json({ error: "Error deleting board" });
       }
     });
