@@ -12,10 +12,10 @@ export const useButton = (buttonConfig: ButtonConfig) => {
     const loop = !!buttonConfig.interval;
     const button = document.getElementById(buttonConfig.id);
     const classesToToggle = loop
-      ? ["bg-purple-200", "bg-purple-100", "scale-105"]
-      : ["bg-red-200", "bg-red-100", "scale-105"];
+      ? ["bg-purple-200", "scale-105"]
+      : ["bg-red-200", "scale-105"];
 
-    const removeFocus = (e) => {
+    const removeFocus = (e:KeyboardEvent) => {
       if (
         e.key === buttonConfig.keyBinding &&
         !isInputActive &&
@@ -24,15 +24,22 @@ export const useButton = (buttonConfig: ButtonConfig) => {
         synth.triggerRelease();
         setTimeout(() => {
           classesToToggle.forEach((className) =>
-            button?.classList.toggle(className)
+            button?.classList.remove(className)
           );
         }, 200);
       }
     };
 
-    const keyBindingHandler = (e) => {
+    const keyBindingHandler = (e: KeyboardEvent) => {
       // e.repeat is ignored to prevent repetition when a key is held down
-      if (e.ctrlKey || e.shiftKey || e.altKey || e.metaKey || e.repeat) {
+      if (
+        e.ctrlKey ||
+        e.shiftKey ||
+        e.altKey ||
+        e.metaKey ||
+        e.repeat ||
+        e.key === "CapsLock"
+      ) {
         return;
       }
       if (e.key === buttonConfig.keyBinding && !isInputActive) {
@@ -41,7 +48,7 @@ export const useButton = (buttonConfig: ButtonConfig) => {
             clearInterval(intervalRef.current);
             intervalRef.current = null;
             classesToToggle.forEach((className) =>
-              button?.classList.toggle(className)
+              button?.classList.add(className)
             );
             // Stop the loop when pressed again
             return;
@@ -54,19 +61,19 @@ export const useButton = (buttonConfig: ButtonConfig) => {
             );
             // Active styling
             classesToToggle.forEach((className) =>
-              button?.classList.toggle(className)
+              button?.classList.add(className)
             );
 
             setTimeout(() => {
               classesToToggle.forEach((className) =>
-                button?.classList.toggle(className)
+                button?.classList.remove(className)
               );
             }, 200);
           }, (buttonConfig.interval || 1) * 1000);
         } else {
           // Active styling
           classesToToggle.forEach((className) =>
-            button?.classList.toggle(className)
+            button?.classList.add(className)
           );
           synth.triggerAttack(buttonConfig.note);
         }

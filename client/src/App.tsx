@@ -14,7 +14,7 @@ function App() {
 
   return (
     <main
-      className="relative h-screen bg-blue-50"
+      className="relative h-screen bg-blue-50 overflow-hidden"
       style={{
         backgroundImage:
           "radial-gradient(#444cf7 0.5px, transparent 0.5px), radial-gradient(#444cf7 0.5px, #e5e5f7 0.5px)",
