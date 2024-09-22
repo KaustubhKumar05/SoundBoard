@@ -15,7 +15,7 @@ export const useButton = (buttonConfig: ButtonConfig) => {
       ? ["bg-purple-200", "scale-105"]
       : ["bg-red-200", "scale-105"];
 
-    const removeFocus = (e:KeyboardEvent) => {
+    const removeFocus = (e: KeyboardEvent) => {
       if (
         e.key === buttonConfig.keyBinding &&
         !isInputActive &&
@@ -59,7 +59,7 @@ export const useButton = (buttonConfig: ButtonConfig) => {
               buttonConfig.note,
               buttonConfig.duration
             );
-            // Active styling
+
             classesToToggle.forEach((className) =>
               button?.classList.add(className)
             );
@@ -71,7 +71,6 @@ export const useButton = (buttonConfig: ButtonConfig) => {
             }, 200);
           }, (buttonConfig.interval || 1) * 1000);
         } else {
-          // Active styling
           classesToToggle.forEach((className) =>
             button?.classList.add(className)
           );

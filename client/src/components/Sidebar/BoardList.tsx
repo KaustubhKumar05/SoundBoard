@@ -6,7 +6,7 @@ import { useFetchBoardList } from "../../hooks/useFetchBoardList";
 
 export const BoardList = () => {
   const inProgress = useAppStore((store) => store.inProgress);
-  
+
   const boardName = useBoardStore((store) => store.boardName);
 
   const { boardList, updateBoardList } = useFetchBoardList();

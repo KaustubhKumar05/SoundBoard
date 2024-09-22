@@ -5,7 +5,7 @@ import { DURATION } from "../constants";
 const useBoardStore = create<BoardStore>((set) => ({
   boardName: "Default",
   setBoardName: (newName: string) => set({ boardName: newName }),
-  boardList: [],
+  boardList: ["Default"],
   setBoardList: (newList: string[]) => set({ boardList: newList }),
   buttons: [
     { keyBinding: "q", note: "C4", duration: DURATION, id: "0" },
