@@ -27,7 +27,7 @@ async function startServer() {
     app.post("/api/boards", async (req, res) => {
       try {
         const { key, config } = req.body;
-        await client.set(key, JSON.stringify(config));
+        await client.set("board_" + key, JSON.stringify(config));
         console.log(`Board saved - ${key}`);
         res.status(200).json({ message: "Board saved successfully" });
       } catch (err) {
@@ -39,9 +39,9 @@ async function startServer() {
     // Retrieve keys -> board names
     app.get("/api/boards", async (_, res) => {
       try {
-        const keys = await client.keys("*");
+        const keys = await client.keys("board_*");
         console.log(`Fetched ${keys.length} boards`);
-        res.json(keys);
+        res.json(keys.map(key => key.slice(6)));
       } catch (err) {
         console.error(`Error fetching board names:`, err);
         res.status(500).json({ error: "Error retrieving boards" });
@@ -52,7 +52,7 @@ async function startServer() {
     app.get("/api/boards/:key", async (req, res) => {
       try {
         const { key } = req.params;
-        const reply = await client.get(key);
+        const reply = await client.get("board_" + key);
         if (reply) {
           console.log(`Fetched config for board - ${key}`);
           res.json(JSON.parse(reply));
@@ -76,9 +76,9 @@ async function startServer() {
             .status(400)
             .json({ error: "Default board cannot be updated" });
         }
-        const exists = await client.exists(key);
+        const exists = await client.exists("board_" + key);
         if (exists) {
-          await client.set(key, JSON.stringify(config));
+          await client.set("board_" + key, JSON.stringify(config));
           console.log(`Board updated - ${key}`);
           res.json({ message: "Board updated successfully" });
         } else {
@@ -100,7 +100,7 @@ async function startServer() {
             .status(400)
             .json({ error: "Default board cannot be deleted" });
         }
-        const reply = await client.del(key);
+        const reply = await client.del("board_" + key);
         if (reply === 1) {
           console.log(`Board deleted - ${key}`);
           res.json({ message: "Board deleted successfully" });
@@ -109,7 +109,7 @@ async function startServer() {
           res.status(404).json({ error: "Board not found" });
         }
       } catch (err) {
-        console.error(`Error deleting board ${key}:`,err);
+        console.error(`Error deleting board ${key}:`, err);
         res.status(500).json({ error: "Error deleting board" });
       }
     });
